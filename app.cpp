@@ -38,13 +38,11 @@ void displayProducts(Product products[], int productCount)
 {
     for (int i = 0; i < productCount; i++)
     {
+        cout << "ID: " << i << endl;
         cout << "Name: " << products[i].name << endl;
         cout << "Price: " << products[i].price << endl;
         cout << "Category: " << products[i].category << endl;
-        cout << "Stock: " << products[i].stock << endl;
         cout << "Brand: " << products[i].brand << endl;
-        cout << "Description: " << products[i].description << endl;
-        cout << "Purchases: " << products[i].purchases << endl;
         cout << endl;
     }
 }
