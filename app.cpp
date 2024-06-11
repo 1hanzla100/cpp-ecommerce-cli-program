@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int MAX_RECORDS = 100;
+int const MAX_RECORDS = 100;
 
 struct Product
 {
@@ -22,6 +22,26 @@ struct Cart
 {
     Product product;
     int quantity;
+};
+
+struct OrderItem
+{
+    Product product;
+    int quantity;
+    float subTotal;
+};
+
+struct Order
+{
+    OrderItem orderItems[MAX_RECORDS];
+    int orderItemCount;
+    float total;
+    string name;
+    string address;
+    string phone;
+    string city;
+    string state;
+    string paymentTransactionId;
 };
 
 void displayMainMenu()
