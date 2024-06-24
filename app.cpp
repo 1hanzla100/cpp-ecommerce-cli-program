@@ -280,6 +280,8 @@ void displayOrderDetails(Order orders[], int orderCount, int orderIndex)
     cout << "State: " << order.state << endl;
     cout << "Payment Transaction ID: " << order.paymentTransactionId << endl;
     cout << "Total: $" << order.total << endl;
+    cout << endl;
+    cout << "Items: " << endl;
 
     for (int i = 0; i < order.orderItemCount; i++)
     {
