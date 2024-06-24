@@ -74,31 +74,33 @@ void displayProducts(Product products[], int productCount)
     }
 }
 
+void displayDetails(Product products[], int productCount, int index)
+{
+    if (index >= 0 && index < productCount)
+    {
+        cout << "Name:  " << products[index].name << endl;
+        cout << "Category:  " << products[index].category << endl;
+        cout << "Price:  " << products[index].price << endl;
+        cout << "Brand:  " << products[index].brand << endl;
+        cout << "Description: " << products[index].description << endl;
+        cout << "Purchases: " << products[index].purchases << endl;
+        cout << "Stock: " << products[index].stock << endl;
+        cout << endl;
+    }
+    else
+    {
+        cout << "Invalid product ID." << endl;
+    }
+}
+
 void searchProducts(Product products[], int productCount, string input)
 {
     for (int i = 0; i < productCount; i++)
     {
         if (input == products[i].category || input == products[i].name)
         {
-            cout << i << " \t " << products[i].name << " \t " << products[i].price << " \t " << products[i].brand << endl;
+            displayDetails(products, productCount, i);
         }
-    }
-}
-
-void displayDetails(Product products[], int productCount, int index)
-{
-    if (index >= 0 && index < productCount)
-    {
-        cout << "Name:  " << products[index].name << endl;
-        cout << "Price:  " << products[index].price << endl;
-        cout << "Brand:  " << products[index].brand << endl;
-        cout << "Description: " << products[index].description << endl;
-        cout << "Purchases: " << products[index].purchases << endl;
-        cout << "Stock: " << products[index].stock << endl;
-    }
-    else
-    {
-        cout << "Invalid product ID." << endl;
     }
 }
 
@@ -140,6 +142,16 @@ Cart addToCart(Product products[], int productCount)
     return cart;
 }
 
+float getCartTotal(Cart cart[], int cartCount)
+{
+    float total = 0.0;
+    for (int i = 0; i < cartCount; i++)
+    {
+        total += cart[i].product.price * cart[i].quantity;
+    }
+    return total;
+}
+
 void displayCart(Cart cart[], int cartCount)
 {
     for (int i = 0; i < cartCount; i++)
@@ -151,6 +163,7 @@ void displayCart(Cart cart[], int cartCount)
         cout << "Subtotal: " << cart[i].product.price * cart[i].quantity << endl;
         cout << endl;
     }
+    cout << "Total: $" << getCartTotal(cart, cartCount) << endl;
 }
 
 void removeItemFromCart(Cart *cart, int *cartCount)
@@ -224,6 +237,13 @@ void checkout(Cart cart[], int &cartCount, Order orders[], int &orderCount)
     cartCount = 0;
 
     cout << "Order placed successfully! Your total is $" << total << endl;
+
+    ofstream fout("Orders.csv", ios::app);
+    fout << order.name << "," << order.address << "," << order.phone << "," << order.city << "," << order.state << "," << order.paymentTransactionId << "," << order.total << "," << order.orderItemCount;
+    for (int i = 0; i < order.orderItemCount; i++)
+    {
+        fout << "," << order.orderItems[i].product.name << "," << order.orderItems[i].product.price << "," << order.orderItems[i].quantity << "," << order.orderItems[i].subTotal;
+    }
 }
 
 // Function to display all orders
