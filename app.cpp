@@ -237,13 +237,6 @@ void checkout(Cart cart[], int &cartCount, Order orders[], int &orderCount)
     cartCount = 0;
 
     cout << "Order placed successfully! Your total is $" << total << endl;
-
-    ofstream fout("Orders.csv", ios::app);
-    fout << order.name << "," << order.address << "," << order.phone << "," << order.city << "," << order.state << "," << order.paymentTransactionId << "," << order.total << "," << order.orderItemCount;
-    for (int i = 0; i < order.orderItemCount; i++)
-    {
-        fout << "," << order.orderItems[i].product.name << "," << order.orderItems[i].product.price << "," << order.orderItems[i].quantity << "," << order.orderItems[i].subTotal;
-    }
 }
 
 // Function to display all orders
